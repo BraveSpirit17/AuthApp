@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthApp.Api", "AuthApp.Api\AuthApp.Api.csproj", "{925444D2-0F16-4BF0-9AEE-762A74C780D4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3D40B83E-D917-4333-AC07-80B5FFBF0BF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{156AEA64-9DFA-4963-81F7-26D817279EB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,8 @@ Global
 		{925444D2-0F16-4BF0-9AEE-762A74C780D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{925444D2-0F16-4BF0-9AEE-762A74C780D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{925444D2-0F16-4BF0-9AEE-762A74C780D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{925444D2-0F16-4BF0-9AEE-762A74C780D4} = {3D40B83E-D917-4333-AC07-80B5FFBF0BF2}
 	EndGlobalSection
 EndGlobal
