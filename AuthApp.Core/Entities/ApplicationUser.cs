@@ -1,7 +1,9 @@
-﻿using AuthApp.Core.Entities.Base;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using AuthApp.Core.Entities.Base;
 
 namespace AuthApp.Core.Entities;
 
+[Table("Users")]
 public class ApplicationUser : Entity
 {
     public string? UserName { get; set; }

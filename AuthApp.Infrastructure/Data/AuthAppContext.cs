@@ -1,6 +1,18 @@
-﻿namespace AuthApp.Infrastructure.Data;
+﻿using AuthApp.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
-public class AuthAppContext
+namespace AuthApp.Infrastructure.Data;
+
+public class AuthAppContext : DbContext
 {
-    
+    public AuthAppContext()
+    {
+    }
+
+    public AuthAppContext(DbContextOptions<AuthAppContext> options)
+        : base(options)
+    {
+    }
+
+    public DbSet<ApplicationUser> Users { get; set; }
 }
