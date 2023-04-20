@@ -1,5 +1,7 @@
 using System.Text;
+using AuthApp.Core.Repositories;
 using AuthApp.Infrastructure.Data;
+using AuthApp.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +13,7 @@ services.AddDbContext<AuthAppContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
+services.AddTransient<IUserRepository, UserRepository>();
 
 services.AddControllers();
 
