@@ -1,14 +1,15 @@
 ﻿using AuthApp.Core.Entities.Base;
 using AuthApp.Core.Repositories.Base;
+using AuthApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthApp.Infrastructure.Repositories.Base;
 
 public class Repository<T> : IRepository<T> where T : Entity
 {
-    private readonly DbContext _context;
+    private readonly AuthAppContext _context;
 
-    protected Repository(DbContext context)
+    public Repository(AuthAppContext context)
     {
         _context = context;
     }

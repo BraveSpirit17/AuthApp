@@ -1,19 +1,29 @@
 using System.Text;
+using AuthApp.Application.Interfaces;
+using AuthApp.Application.Options;
+using AuthApp.Application.Services;
 using AuthApp.Core.Repositories;
+using AuthApp.Core.Repositories.Base;
 using AuthApp.Infrastructure.Data;
 using AuthApp.Infrastructure.Repositories;
+using AuthApp.Infrastructure.Repositories.Base;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
+var configuration = builder.Configuration;
 
 services.AddDbContext<AuthAppContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
+services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
+
+services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 services.AddTransient<IUserRepository, UserRepository>();
+services.AddTransient<ITokenService, TokenService>();
 
 services.AddControllers();
 
@@ -21,7 +31,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
 {
     options.RequireHttpsMetadata = false;
     options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters()
+    options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
         ValidateAudience = true,

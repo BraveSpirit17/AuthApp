@@ -4,5 +4,5 @@ namespace AuthApp.Application.Interfaces;
 
 public interface ITokenService
 {
-    Task<string> GetTokenAsync(ApplicationUserDto applicationUserDto, CancellationToken cancellationToken = new());
+    Task<string> GetTokenAsync(ApplicationUserDto applicationUserDto, CancellationToken cancellationToken = default);
 }

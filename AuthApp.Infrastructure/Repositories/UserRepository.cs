@@ -10,7 +10,7 @@ public class UserRepository : Repository<ApplicationUser>, IUserRepository
 {
     private readonly AuthAppContext _context;
 
-    protected UserRepository(AuthAppContext context) : base(context)
+    public UserRepository(AuthAppContext context) : base(context)
     {
         _context = context;
     }
