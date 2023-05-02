@@ -24,6 +24,7 @@ services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName))
 services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 services.AddTransient<IUserRepository, UserRepository>();
 services.AddTransient<ITokenService, TokenService>();
+services.AddTransient<IPasswordHashingService, PasswordHashingService>();
 
 services.AddControllers();
 
