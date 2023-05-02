@@ -5,5 +5,5 @@ namespace AuthApp.Core.Repositories;
 
 public interface IUserRepository : IRepository<ApplicationUser>
 {
-    Task<ApplicationUser> GetUserAsync(string login, string password, CancellationToken cancellationToken = new());
+    Task<ApplicationUser?> GetUserAsync(string userName, CancellationToken cancellationToken = default);
 }

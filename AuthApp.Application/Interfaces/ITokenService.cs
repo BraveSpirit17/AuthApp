@@ -1,8 +1,6 @@
-﻿using AuthApp.Application.Dto;
-
-namespace AuthApp.Application.Interfaces;
+﻿namespace AuthApp.Application.Interfaces;
 
 public interface ITokenService
 {
-    Task<string> GetTokenAsync(ApplicationUserDto applicationUserDto, CancellationToken cancellationToken = default);
+    string TokenGeneration(string userName);
 }

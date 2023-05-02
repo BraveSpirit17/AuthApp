@@ -15,10 +15,9 @@ public class UserRepository : Repository<ApplicationUser>, IUserRepository
         _context = context;
     }
 
-    public async Task<ApplicationUser> GetUserAsync(string login, string password,
-        CancellationToken cancellationToken = new())
+    public async Task<ApplicationUser?> GetUserAsync(string userName, CancellationToken cancellationToken = default)
     {
         return await _context.Users
-            .FirstAsync(u => u.UserName == login && u.Password == password, cancellationToken);
+            .FirstOrDefaultAsync(u => u.UserName == userName, cancellationToken);
     }
 }
