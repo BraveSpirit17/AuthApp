@@ -13,6 +13,9 @@ internal class UserEntityTypeConfiguration : BaseEntityTypeConfiguration<Applica
 
         builder.ToTable("Users");
 
+        builder.HasIndex(u => u.Email).IsUnique();
+        builder.HasIndex(u => u.UserName).IsUnique();
+        
         builder.Property(u => u.Id).ValueGeneratedOnAdd();
 
         builder.Property(u => u.FirstName).HasMaxLength(50).IsRequired();
