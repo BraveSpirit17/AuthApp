@@ -1,17 +1,21 @@
 ﻿using AuthApp.Core.Entities;
+using AuthApp.Infrastructure.Data.Configurations.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AuthApp.Infrastructure.Data.Configurations;
 
-internal class UserEntityTypeConfiguration : IEntityTypeConfiguration<ApplicationUser>
+internal class UserEntityTypeConfiguration : BaseEntityTypeConfiguration<ApplicationUser>
 {
-    public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+    public override void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
+        base.Configure(builder);
+
         builder.ToTable("Users");
-        
+
         builder.Property(u => u.Id).ValueGeneratedOnAdd();
         builder.Property(u => u.UserName).HasMaxLength(50).IsRequired();
         builder.Property(u => u.Email).HasMaxLength(50).IsRequired();
+        builder.Property(u => u.PasswordHash).HasMaxLength(35).IsRequired();
     }
 }
