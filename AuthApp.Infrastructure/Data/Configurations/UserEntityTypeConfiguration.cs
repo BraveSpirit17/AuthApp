@@ -14,8 +14,15 @@ internal class UserEntityTypeConfiguration : BaseEntityTypeConfiguration<Applica
         builder.ToTable("Users");
 
         builder.Property(u => u.Id).ValueGeneratedOnAdd();
+
+        builder.Property(u => u.FirstName).HasMaxLength(50).IsRequired();
+        builder.Property(u => u.LastName).HasMaxLength(50).IsRequired();
+        builder.Property(u => u.MiddleName).HasMaxLength(50);
+        
+        builder.Property(u => u.MobilePhone).HasMaxLength(65);
+        builder.Property(u => u.Email).HasMaxLength(110).IsRequired();
+        
         builder.Property(u => u.UserName).HasMaxLength(50).IsRequired();
-        builder.Property(u => u.Email).HasMaxLength(50).IsRequired();
         builder.Property(u => u.PasswordHash).HasMaxLength(35).IsRequired();
     }
 }
