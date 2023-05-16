@@ -3,7 +3,7 @@ using AuthApp.Application.Interfaces;
 
 namespace AuthApp.Application.Services;
 
-public class PasswordHashingService : IPasswordHashingService
+internal class PasswordHashingService : IPasswordHashingService
 {
     // Значение, определяющее размер соли в байтах
     private const int SaltSize = 16;

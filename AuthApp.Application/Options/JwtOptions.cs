@@ -1,6 +1,6 @@
 namespace AuthApp.Application.Options;
 
-public class JwtOptions
+internal class JwtOptions
 {
     public const string SectionName = nameof(JwtOptions);
 

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthApp.Infrastructure.Data;
 
-public class AuthAppDbContext : DbContext
+internal class AuthAppDbContext : DbContext
 {
     public DbSet<ApplicationUser> Users { get; set; }
 

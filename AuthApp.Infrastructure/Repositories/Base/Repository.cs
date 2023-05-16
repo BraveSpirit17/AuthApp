@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthApp.Infrastructure.Repositories.Base;
 
-public class Repository<T> : IRepository<T> where T : Entity
+internal class Repository<T> : IRepository<T> where T : Entity
 {
     private readonly AuthAppDbContext _dbContext;
 

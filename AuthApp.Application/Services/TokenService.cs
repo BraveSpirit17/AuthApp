@@ -9,7 +9,7 @@ using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegiste
 
 namespace AuthApp.Application.Services;
 
-public class TokenService : ITokenService
+internal class TokenService : ITokenService
 {
     private const int ExpirationMinutes = 30;
 
