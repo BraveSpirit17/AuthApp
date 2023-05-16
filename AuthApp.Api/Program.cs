@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-services.AddDbContext<AuthAppContext>(options =>
+services.AddDbContext<AuthAppDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.

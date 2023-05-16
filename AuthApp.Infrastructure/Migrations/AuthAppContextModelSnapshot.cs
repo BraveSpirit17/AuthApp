@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AuthApp.Infrastructure.Migrations
 {
-    [DbContext(typeof(AuthAppContext))]
+    [DbContext(typeof(AuthAppDbContext))]
     partial class AuthAppContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

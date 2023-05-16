@@ -8,16 +8,16 @@ namespace AuthApp.Infrastructure.Repositories;
 
 public class UserRepository : Repository<ApplicationUser>, IUserRepository
 {
-    private readonly AuthAppContext _context;
+    private readonly AuthAppDbContext _dbContext;
 
-    public UserRepository(AuthAppContext context) : base(context)
+    public UserRepository(AuthAppDbContext dbContext) : base(dbContext)
     {
-        _context = context;
+        _dbContext = dbContext;
     }
 
     public async Task<ApplicationUser?> GetUserAsync(string userName, CancellationToken cancellationToken = default)
     {
-        return await _context.Users
+        return await _dbContext.Users
             .FirstOrDefaultAsync(u => u.UserName == userName, cancellationToken);
     }
 }

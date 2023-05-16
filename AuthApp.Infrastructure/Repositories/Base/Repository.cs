@@ -7,28 +7,28 @@ namespace AuthApp.Infrastructure.Repositories.Base;
 
 public class Repository<T> : IRepository<T> where T : Entity
 {
-    private readonly AuthAppContext _context;
+    private readonly AuthAppDbContext _dbContext;
 
-    public Repository(AuthAppContext context)
+    public Repository(AuthAppDbContext dbContext)
     {
-        _context = context;
+        _dbContext = dbContext;
     }
 
     public async Task<T?> GetByIdAsync(string id, CancellationToken cancellationToken = default)
     {
-        return await _context.Set<T>().FirstOrDefaultAsync(e => e.Id.ToString() == id, cancellationToken);
+        return await _dbContext.Set<T>().FirstOrDefaultAsync(e => e.Id.ToString() == id, cancellationToken);
     }
 
     public async Task<List<T>> ListAsync(CancellationToken cancellationToken = default)
     {
-        return await _context.Set<T>().ToListAsync(cancellationToken);
+        return await _dbContext.Set<T>().ToListAsync(cancellationToken);
     }
 
     public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
     {
-        _context.Set<T>().Add(entity);
+        _dbContext.Set<T>().Add(entity);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
 
         return entity;
     }
@@ -36,38 +36,38 @@ public class Repository<T> : IRepository<T> where T : Entity
     public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities,
         CancellationToken cancellationToken = default)
     {
-        await _context.Set<T>().AddRangeAsync(entities, cancellationToken);
+        await _dbContext.Set<T>().AddRangeAsync(entities, cancellationToken);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
 
         return entities;
     }
 
     public virtual async Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
     {
-        _context.Set<T>().Update(entity);
+        _dbContext.Set<T>().Update(entity);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public virtual async Task UpdateRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
     {
-        _context.Set<T>().UpdateRange(entities);
+        _dbContext.Set<T>().UpdateRange(entities);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task DeleteAsync(T entity, CancellationToken cancellationToken = default)
     {
-        _context.Set<T>().Remove(entity);
+        _dbContext.Set<T>().Remove(entity);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task DeleteRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
     {
-        _context.Set<T>().RemoveRange(entities);
+        _dbContext.Set<T>().RemoveRange(entities);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

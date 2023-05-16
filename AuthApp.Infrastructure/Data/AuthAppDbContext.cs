@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthApp.Infrastructure.Data;
 
-public class AuthAppContext : DbContext
+public class AuthAppDbContext : DbContext
 {
     public DbSet<ApplicationUser> Users { get; set; }
 
-    public AuthAppContext(DbContextOptions<AuthAppContext> options) : base(options)
+    public AuthAppDbContext(DbContextOptions<AuthAppDbContext> options) : base(options)
     {
     }
 

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AuthApp.Infrastructure.Migrations
 {
-    [DbContext(typeof(AuthAppContext))]
+    [DbContext(typeof(AuthAppDbContext))]
     [Migration("20230516121138_AddedNewFieldsToUsers")]
     partial class AddedNewFieldsToUsers
     {
