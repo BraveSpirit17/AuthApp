@@ -13,6 +13,8 @@ public static class ApplicationServiceCollectionExtensions
     {
         services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
 
+        services.AddScoped<IUserService, UserService>();
+        
         services.AddTransient<ITokenService, TokenService>();
         services.AddTransient<IPasswordHashingService, PasswordHashingService>();
 
