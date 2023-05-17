@@ -1,6 +1,6 @@
-﻿using AuthApp.Application.Commands;
-using AuthApp.Application.Dto;
+﻿using AuthApp.Application.Dto;
 using AuthApp.Application.Interfaces;
+using AuthApp.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +22,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> LoginAsync([FromBody] UserCredentialDto userCredential)
     {
-        return Ok(await _mediator.Send(new LoginCommand(userCredential.UserName,
+        return Ok(await _mediator.Send(new LoginQuery(userCredential.UserName,
             userCredential.Password, userCredential.Password)));
     }
 
