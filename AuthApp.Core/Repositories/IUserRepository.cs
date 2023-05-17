@@ -5,5 +5,7 @@ namespace AuthApp.Core.Repositories;
 
 public interface IUserRepository : IRepository<ApplicationUser>
 {
-    Task<ApplicationUser?> GetUserAsync(string userName, CancellationToken cancellationToken = default);
+    Task<ApplicationUser?> FindByUserNameAsync(string userName, CancellationToken cancellationToken = default);
+    
+    Task<ApplicationUser?> FindByEmailAsync(string email, CancellationToken cancellationToken = default);
 }

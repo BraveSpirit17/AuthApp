@@ -2,5 +2,13 @@
 
 public class BaseDto
 {
-    public Guid Id { get; set; }
+    public bool Success { get; protected set; }
+
+    public string Message { get; protected set; }
+
+    public BaseDto(bool success, string message)
+    {
+        Success = success;
+        Message = message;
+    }
 }

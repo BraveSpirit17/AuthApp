@@ -1,8 +1,6 @@
-﻿using AuthApp.Application.Dto.Base;
+﻿namespace AuthApp.Application.Dto;
 
-namespace AuthApp.Application.Dto;
-
-public class UserDto : BaseDto
+public class UserDto
 {
     public string FullName { get; set; }
 

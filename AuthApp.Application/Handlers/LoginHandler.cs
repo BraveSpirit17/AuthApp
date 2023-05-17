@@ -1,13 +1,21 @@
 using AuthApp.Application.Commands;
 using AuthApp.Application.Dto;
+using AuthApp.Application.Interfaces;
 using MediatR;
 
 namespace AuthApp.Application.Handlers;
 
-public class LoginHandler : IRequestHandler<LoginCommand, AccessTokenDto>
+public class LoginHandler : IRequestHandler<LoginCommand, TokenDto>
 {
-    public Task<AccessTokenDto> Handle(LoginCommand request, CancellationToken cancellationToken)
+    private readonly IAuthenticationService _authenticationService;
+
+    public LoginHandler(IAuthenticationService authenticationService)
     {
-        throw new NotImplementedException();
+        _authenticationService = authenticationService;
+    }
+
+    public async Task<TokenDto> Handle(LoginCommand request, CancellationToken cancellationToken)
+    {
+        return await _authenticationService.CreateAccessTokenAsync(request.UserName, request.Password);
     }
 }

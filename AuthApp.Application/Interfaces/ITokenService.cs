@@ -1,6 +1,8 @@
-﻿namespace AuthApp.Application.Interfaces;
+﻿using AuthApp.Application.Dto;
+
+namespace AuthApp.Application.Interfaces;
 
 public interface ITokenService
 {
-    string TokenGeneration(string userName);
+    AccessTokenDto TokenGeneration(string userName);
 }

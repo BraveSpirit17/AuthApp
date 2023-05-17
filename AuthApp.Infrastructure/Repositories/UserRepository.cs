@@ -15,9 +15,16 @@ internal class UserRepository : Repository<ApplicationUser>, IUserRepository
         _dbContext = dbContext;
     }
 
-    public async Task<ApplicationUser?> GetUserAsync(string userName, CancellationToken cancellationToken = default)
+    public async Task<ApplicationUser?> FindByUserNameAsync(string userName,
+        CancellationToken cancellationToken = default)
     {
         return await _dbContext.Users
-            .FirstOrDefaultAsync(u => u.UserName == userName, cancellationToken);
+            .FirstOrDefaultAsync(u => u.UserName.Equals(userName), cancellationToken);
+    }
+
+    public async Task<ApplicationUser?> FindByEmailAsync(string email, CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Users
+            .FirstOrDefaultAsync(u => u.Email.Equals(email), cancellationToken);
     }
 }

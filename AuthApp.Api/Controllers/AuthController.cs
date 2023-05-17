@@ -1,4 +1,5 @@
-﻿using AuthApp.Application.Dto;
+﻿using AuthApp.Application.Commands;
+using AuthApp.Application.Dto;
 using AuthApp.Application.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,19 +22,8 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> LoginAsync([FromBody] UserCredentialDto userCredential)
     {
-        // var response = await _authenticationService
-        //     .CreateAccessTokenAsync(userCredentials.Email, userCredentials.Password);
-        //
-        // if (!response.Success)
-        // {
-        //     return BadRequest(response.Message);
-        // }
-        //
-        // var accessTokenResource = _mapper.Map<AccessToken, AccessTokenResource>(response.Token);
-        //
-        // return Ok(accessTokenResource);
-        //return await _mediator.Send(new GetEmployeeByIdQuery(id));
-        return Ok();
+        return Ok(await _mediator.Send(new LoginCommand(userCredential.UserName,
+            userCredential.Password, userCredential.Password)));
     }
 
     // [HttpPost]
