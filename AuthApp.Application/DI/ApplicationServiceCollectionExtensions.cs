@@ -1,4 +1,5 @@
-﻿using AuthApp.Application.Interfaces;
+﻿using System.Reflection;
+using AuthApp.Application.Interfaces;
 using AuthApp.Application.Options;
 using AuthApp.Application.Services;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +15,12 @@ public static class ApplicationServiceCollectionExtensions
         services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
 
         services.AddScoped<IUserService, UserService>();
-        
+
+        services.AddTransient<IAuthenticationService, AuthenticationService>();
+
+        services.AddMediatR(cfg =>
+            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
         services.AddTransient<ITokenService, TokenService>();
         services.AddTransient<IPasswordHashingService, PasswordHashingService>();
 
