@@ -26,7 +26,7 @@ internal class Repository<T> : IRepository<T> where T : Entity
 
     public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
     {
-        _dbContext.Set<T>().Add(entity);
+        await _dbContext.Set<T>().AddAsync(entity, cancellationToken);
 
         await _dbContext.SaveChangesAsync(cancellationToken);
 

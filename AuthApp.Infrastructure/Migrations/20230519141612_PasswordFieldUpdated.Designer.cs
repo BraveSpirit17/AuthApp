@@ -4,6 +4,7 @@ using AuthApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthApp.Infrastructure.Migrations
 {
     [DbContext(typeof(AuthAppDbContext))]
-    partial class AuthAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230519141612_PasswordFieldUpdated")]
+    partial class PasswordFieldUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +35,7 @@ namespace AuthApp.Infrastructure.Migrations
 
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -71,9 +72,8 @@ namespace AuthApp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(145)");
 
                     b.Property<DateTime?>("UpdateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
+                        .ValueGeneratedOnUpdate()
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
                         .IsRequired()

@@ -9,7 +9,7 @@ internal abstract class BaseEntityTypeConfiguration<TEntity> : IEntityTypeConfig
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
         builder.Property(e => e.Id).ValueGeneratedOnAdd();
-        builder.Property(e => e.CreateDate).ValueGeneratedOnAdd();
-        builder.Property(e => e.UpdateDate).ValueGeneratedOnUpdate();
+        builder.Property(e => e.CreateDate).HasDefaultValueSql("GETDATE()");
+        builder.Property(e => e.UpdateDate).HasDefaultValueSql("GETDATE()");
     }
 }

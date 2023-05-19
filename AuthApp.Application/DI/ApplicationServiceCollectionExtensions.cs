@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using AuthApp.Application.Interfaces;
+using AuthApp.Application.Mapping;
 using AuthApp.Application.Options;
 using AuthApp.Application.Services;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,8 @@ public static class ApplicationServiceCollectionExtensions
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
+        services.AddAutoMapper(typeof(DtoToModelProfile), typeof(ModelToDtoProfile));
+        
         services.AddTransient<ITokenService, TokenService>();
         services.AddTransient<IPasswordHashingService, PasswordHashingService>();
 

@@ -1,6 +1,4 @@
-﻿using AuthApp.Application.Dto;
-using AuthApp.Application.Interfaces;
-using AuthApp.Application.Queries;
+﻿using AuthApp.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,18 +9,16 @@ namespace AuthApp.Api.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly ITokenService _tokenService;
 
-    public AuthController(ITokenService tokenService, IMediator mediator)
+    public AuthController(IMediator mediator)
     {
-        _tokenService = tokenService;
         _mediator = mediator;
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> LoginAsync([FromBody] UserCredentialDto userCredential)
+    public async Task<IActionResult> LoginAsync([FromBody] LoginQuery loginQuery)
     {
-        return Ok(await _mediator.Send(new LoginQuery(userCredential.UserName, userCredential.Password)));
+        return Ok(await _mediator.Send(loginQuery));
     }
 
     // [HttpPost]

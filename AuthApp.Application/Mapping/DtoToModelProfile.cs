@@ -1,3 +1,4 @@
+using AuthApp.Application.Commands;
 using AuthApp.Application.Dto;
 using AuthApp.Core.Entities;
 using AutoMapper;
@@ -9,5 +10,7 @@ public class DtoToModelProfile : Profile
     public DtoToModelProfile()
     {
         CreateMap<UserCredentialDto, ApplicationUser>();
+
+        CreateMap<CreateUserCommand, ApplicationUser>();
     }
 }
