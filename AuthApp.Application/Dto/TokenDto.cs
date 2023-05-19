@@ -1,13 +1,17 @@
-using AuthApp.Application.Dto.Base;
-
 namespace AuthApp.Application.Dto;
 
-public class TokenDto : BaseDto
+public class TokenDto
 {
-    public AccessTokenDto Token { get; set; }
+    public string AccessToken { get; protected set; }
 
-    public TokenDto(bool success, string message, AccessTokenDto token) : base(success, message)
+    public bool Success { get; protected set; }
+
+    public string Message { get; protected set; }
+
+    public TokenDto(string accessToken, bool success, string message)
     {
-        Token = token;
+        Success = success;
+        AccessToken = accessToken;
+        Message = message;
     }
 }

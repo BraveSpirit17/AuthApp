@@ -22,8 +22,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> LoginAsync([FromBody] UserCredentialDto userCredential)
     {
-        return Ok(await _mediator.Send(new LoginQuery(userCredential.UserName,
-            userCredential.Password, userCredential.Password)));
+        return Ok(await _mediator.Send(new LoginQuery(userCredential.UserName, userCredential.Password)));
     }
 
     // [HttpPost]

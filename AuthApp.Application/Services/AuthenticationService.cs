@@ -20,15 +20,15 @@ public class AuthenticationService : IAuthenticationService
     public async Task<TokenDto> CreateAccessTokenAsync(string userName, string password)
     {
         var user = await _userService.FindByUserNameAsync(userName);
-        
+
         if (user == null || !_passwordHashingService.Validate(user.PasswordHash, password))
         {
-            return new TokenDto(false, "Invalid credentials.", null);
+            return new TokenDto(string.Empty, false, "Invalid credentials.");
         }
 
         var token = _tokenService.TokenGeneration(user.UserName);
 
-        return new TokenDto(true, null, token);
+        return new TokenDto(token, true, string.Empty);
     }
 
     public Task<TokenDto> RefreshTokenAsync(string refreshToken, string userName)

@@ -1,7 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using AuthApp.Application.Dto;
 using AuthApp.Application.Interfaces;
 using AuthApp.Application.Options;
 using Microsoft.Extensions.Options;
@@ -21,7 +20,7 @@ internal class TokenService : ITokenService
         _jwtOptions = options.Value;
     }
 
-    public AccessTokenDto TokenGeneration(string userName)
+    public string TokenGeneration(string userName)
     {
         var expiration = DateTime.UtcNow.AddMinutes(ExpirationMinutes);
 
@@ -45,9 +44,6 @@ internal class TokenService : ITokenService
             expires: expiration,
             signingCredentials: signIn);
 
-        return new AccessTokenDto
-        {
-            AccessToken = new JwtSecurityTokenHandler().WriteToken(token)
-        };
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

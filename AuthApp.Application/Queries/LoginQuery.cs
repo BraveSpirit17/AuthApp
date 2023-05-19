@@ -3,4 +3,4 @@ using MediatR;
 
 namespace AuthApp.Application.Queries;
 
-public record LoginQuery(string UserName, string Password, string Email) : IRequest<TokenDto>;
+public record LoginQuery(string UserName, string Password) : IRequest<TokenDto>;
