@@ -23,4 +23,6 @@ public class ApplicationUser : Entity
     public bool IsBlocked { get; set; }
     
     public string? MobilePhone { get; set; }
+    
+    public ICollection<Role> Roles { get; set; }
 }
