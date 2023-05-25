@@ -25,7 +25,7 @@ internal class UserService : IUserService
         return await _userRepository.FindByUserNameAsync(userName, cancellationToken);
     }
 
-    public async Task<UserDto> CreateUserAsync(ApplicationUser user, string password)
+    public async Task<UserDto> CreateUserAsync(ApplicationUser user)
     {
         //TODO
         //return Email already in use
@@ -34,8 +34,6 @@ internal class UserService : IUserService
         // {
         //     
         // }
-
-        user.PasswordHash = _passwordHashingService.GetHash(password);
 
         await _userRepository.AddAsync(user);
 
