@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthApp.Api.Controllers;
 
+[Route("api/auth")]
 [ApiController]
-[Route("[controller]")]
 public class AuthController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -15,15 +15,9 @@ public class AuthController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("login")]
-    public async Task<IActionResult> LoginAsync([FromBody] LoginQuery loginQuery)
+    [HttpPost]
+    public async Task<IActionResult> Login([FromBody] LoginQuery loginQuery)
     {
         return Ok(await _mediator.Send(loginQuery));
     }
-
-    // [HttpPost]
-    // public async Task<IActionResult> GetToken(UserCredentialDto userDto)
-    // {
-    //     return Ok(_tokenService.TokenGeneration(userDto.UserName));
-    // }
 }
