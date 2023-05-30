@@ -1,6 +1,8 @@
-﻿namespace AuthApp.Application.Interfaces;
+﻿using System.Security.Claims;
+
+namespace AuthApp.Application.Interfaces;
 
 public interface ITokenService
 {
-    string TokenGeneration(string userName);
+    string TokenGeneration(List<Claim> claims);
 }

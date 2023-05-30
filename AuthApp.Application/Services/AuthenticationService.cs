@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AuthApp.Application.Dto;
 using AuthApp.Application.Interfaces;
 
@@ -26,7 +27,13 @@ public class AuthenticationService : IAuthenticationService
             return new TokenDto(string.Empty, false, "Invalid credentials.");
         }
 
-        var token = _tokenService.TokenGeneration(user.UserName);
+        var claims = new List<Claim>(new[]
+        {
+            new Claim("userName", user.UserName),
+            new Claim("email", user.Email)
+        });
+        
+        var token = _tokenService.TokenGeneration(claims);
 
         return new TokenDto(token, true, string.Empty);
     }

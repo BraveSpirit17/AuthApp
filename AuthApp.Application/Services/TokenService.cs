@@ -20,28 +20,21 @@ internal class TokenService : ITokenService
         _jwtOptions = options.Value;
     }
 
-    public string TokenGeneration(string userName)
+    public string TokenGeneration(List<Claim> claims)
     {
         var expiration = DateTime.UtcNow.AddMinutes(ExpirationMinutes);
 
         //create claims details based on the user information
-        var claims = new[]
-        {
-            new Claim(JwtRegisteredClaimNames.Sub, _jwtOptions.Subject),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-            new Claim("UserName", userName)
-        };
+
+        claims.Add(new(JwtRegisteredClaimNames.Sub, _jwtOptions.Subject));
+        claims.Add(new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+        claims.Add(new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
 
         var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var token = new JwtSecurityToken(
-            _jwtOptions.Issuer,
-            _jwtOptions.Audience,
-            claims,
-            expires: expiration,
+        var token = new JwtSecurityToken(_jwtOptions.Issuer, _jwtOptions.Audience, claims, expires: expiration,
             signingCredentials: signIn);
 
         return new JwtSecurityTokenHandler().WriteToken(token);

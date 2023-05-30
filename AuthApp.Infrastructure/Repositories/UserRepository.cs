@@ -19,12 +19,14 @@ internal class UserRepository : Repository<ApplicationUser>, IUserRepository
         CancellationToken cancellationToken = default)
     {
         return await _dbContext.Users
+            .Include(u => u.Roles)
             .FirstOrDefaultAsync(u => u.UserName.Equals(userName), cancellationToken);
     }
 
     public async Task<ApplicationUser?> FindByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
         return await _dbContext.Users
+            .Include(u => u.Roles)
             .FirstOrDefaultAsync(u => u.Email.Equals(email), cancellationToken);
     }
 }
