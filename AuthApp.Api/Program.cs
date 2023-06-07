@@ -9,6 +9,16 @@ services.ConfigureServices(configuration);
 
 services.AddControllers();
 
+services.AddCors(options =>
+{
+    options.AddPolicy("EnableCORS", policyBuilder =>
+    {
+        policyBuilder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 services.ConfigureAuthentication(configuration);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -26,6 +36,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
+app.UseCors("EnableCORS");
 app.UseAuthentication();
 app.UseAuthorization();
 

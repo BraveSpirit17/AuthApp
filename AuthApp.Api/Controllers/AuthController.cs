@@ -1,23 +1,14 @@
-﻿using AuthApp.Application.Queries;
-using MediatR;
+﻿using AuthApp.Api.Controllers.Base;
+using AuthApp.Application.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthApp.Api.Controllers;
 
-[Route("api/auth")]
-[ApiController]
-public class AuthController : ControllerBase
+public class AuthController : ApiController
 {
-    private readonly IMediator _mediator;
-
-    public AuthController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginQuery loginQuery)
     {
-        return Ok(await _mediator.Send(loginQuery));
+        return Ok(await Mediator.Send(loginQuery));
     }
 }
