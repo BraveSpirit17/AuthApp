@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AuthApp.Infrastructure.Data.Configurations.Base.BaseEntityTypeConfiguration&lt;TEntity&gt;">
+    <Position X="4" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Configurations\Base\BaseEntityTypeConfiguration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AuthApp.Infrastructure.Data.Configurations.RoleEntityTypeConfiguration">
+    <Position X="0.75" Y="2.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Configurations\RoleEntityTypeConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AuthApp.Infrastructure.Data.Configurations.UserEntityTypeConfiguration">
+    <Position X="0.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Configurations\UserEntityTypeConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AuthApp.Infrastructure.Data.AuthAppDbContext">
+    <Position X="4" Y="2.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\AuthAppDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AuthApp.Infrastructure.Repositories.Base.Repository&lt;T&gt;">
+    <Position X="9.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQABAAAADAAAAAAAAAAAAAEAAAAAIAgAAAAAAAAAIIA=</HashCode>
+      <FileName>Repositories\Base\Repository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AuthApp.Infrastructure.Repositories.UserRepository">
+    <Position X="6.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAIAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
