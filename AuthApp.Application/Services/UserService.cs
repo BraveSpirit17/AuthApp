@@ -12,17 +12,12 @@ internal class UserService : IUserService
     private readonly IMapper _mapper;
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHashingService _passwordHashingService;
-    private readonly IAuthenticationService _authenticationService;
-    private readonly ITokenService _tokenService;
 
-    public UserService(IUserRepository userRepository, IPasswordHashingService passwordHashingService, IMapper mapper,
-        IAuthenticationService authenticationService, ITokenService tokenService)
+    public UserService(IUserRepository userRepository, IPasswordHashingService passwordHashingService, IMapper mapper)
     {
         _userRepository = userRepository;
         _passwordHashingService = passwordHashingService;
         _mapper = mapper;
-        _authenticationService = authenticationService;
-        _tokenService = tokenService;
     }
 
     public async Task<ApplicationUser?> FindByUserNameAsync(string userName,
@@ -31,7 +26,7 @@ internal class UserService : IUserService
         return await _userRepository.FindByUserNameAsync(userName, cancellationToken);
     }
 
-    public async Task<TokenDto> CreateUserAsync(ApplicationUser user)
+    public async Task<UserDto> CreateUserAsync(ApplicationUser user)
     {
         var existingEmail = await _userRepository.FindByEmailAsync(user.Email);
 
@@ -49,14 +44,6 @@ internal class UserService : IUserService
 
         await _userRepository.AddAsync(user);
 
-        var claims = new List<Claim>(new[]
-        {
-            new Claim("userName", user.UserName),
-            new Claim("email", user.Email)
-        });
-
-        var token = _tokenService.TokenGeneration(claims);
-
-        return new TokenDto(token, true, string.Empty);
+        return _mapper.Map<UserDto>(user);
     }
 }
