@@ -3,7 +3,7 @@ using MediatR;
 
 namespace AuthApp.Application.Commands;
 
-public class CreateUserCommand : IRequest<UserDto>
+public class CreateUserCommand : IRequest<TokenDto>
 {
     public string FirstName { get; set; }
 

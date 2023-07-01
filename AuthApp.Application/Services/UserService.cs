@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AuthApp.Application.Dto;
 using AuthApp.Application.Interfaces;
 using AuthApp.Core.Entities;
@@ -11,12 +12,17 @@ internal class UserService : IUserService
     private readonly IMapper _mapper;
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHashingService _passwordHashingService;
+    private readonly IAuthenticationService _authenticationService;
+    private readonly ITokenService _tokenService;
 
-    public UserService(IUserRepository userRepository, IPasswordHashingService passwordHashingService, IMapper mapper)
+    public UserService(IUserRepository userRepository, IPasswordHashingService passwordHashingService, IMapper mapper,
+        IAuthenticationService authenticationService, ITokenService tokenService)
     {
         _userRepository = userRepository;
         _passwordHashingService = passwordHashingService;
         _mapper = mapper;
+        _authenticationService = authenticationService;
+        _tokenService = tokenService;
     }
 
     public async Task<ApplicationUser?> FindByUserNameAsync(string userName,
@@ -25,18 +31,32 @@ internal class UserService : IUserService
         return await _userRepository.FindByUserNameAsync(userName, cancellationToken);
     }
 
-    public async Task<UserDto> CreateUserAsync(ApplicationUser user)
+    public async Task<TokenDto> CreateUserAsync(ApplicationUser user)
     {
-        //TODO
-        //return Email already in use
-        // var existingUser = await _userRepository.FindByEmailAsync(user.Email);
-        // if (existingUser != null)
-        // {
-        //     
-        // }
+        var existingEmail = await _userRepository.FindByEmailAsync(user.Email);
+
+        if (existingEmail != null)
+        {
+            throw new Exception("Пользователь с данной почтой уже зарегистрирован.");
+        }
+
+        var existingUserName = await _userRepository.FindByUserNameAsync(user.UserName);
+
+        if (existingUserName != null)
+        {
+            throw new Exception("Пользователь с данным логином уже зарегистрирован.");
+        }
 
         await _userRepository.AddAsync(user);
 
-        return _mapper.Map<UserDto>(user);
+        var claims = new List<Claim>(new[]
+        {
+            new Claim("userName", user.UserName),
+            new Claim("email", user.Email)
+        });
+
+        var token = _tokenService.TokenGeneration(claims);
+
+        return new TokenDto(token, true, string.Empty);
     }
 }

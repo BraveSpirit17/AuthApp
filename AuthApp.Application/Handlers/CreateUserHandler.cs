@@ -7,7 +7,7 @@ using MediatR;
 
 namespace AuthApp.Application.Handlers;
 
-public class CreateUserHandler : IRequestHandler<CreateUserCommand, UserDto>
+public class CreateUserHandler : IRequestHandler<CreateUserCommand, TokenDto>
 {
     private readonly IUserService _userService;
     private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, UserDto>
         _passwordHashingService = passwordHashingService;
     }
 
-    public Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public Task<TokenDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var user = _mapper.Map<ApplicationUser>(request);
 

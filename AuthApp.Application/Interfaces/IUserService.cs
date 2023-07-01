@@ -5,6 +5,6 @@ namespace AuthApp.Application.Interfaces;
 
 public interface IUserService
 {
-    Task<UserDto> CreateUserAsync(ApplicationUser user);
+    Task<TokenDto> CreateUserAsync(ApplicationUser user);
     Task<ApplicationUser?> FindByUserNameAsync(string userName, CancellationToken cancellationToken = default);
 }

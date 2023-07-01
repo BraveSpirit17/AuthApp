@@ -1,4 +1,5 @@
 using AuthApp.Api.Extensions;
+using AuthApp.Application.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -7,7 +8,7 @@ var configuration = builder.Configuration;
 // Add services to the container.
 services.ConfigureServices(configuration);
 
-services.AddControllers();
+services.AddControllers(config => { config.Filters.Add(new GlobalExceptionFilter()); });
 
 services.AddCors(options =>
 {

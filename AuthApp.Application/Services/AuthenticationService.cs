@@ -24,7 +24,8 @@ public class AuthenticationService : IAuthenticationService
 
         if (user == null || !_passwordHashingService.Validate(user.PasswordHash, password))
         {
-            return new TokenDto(string.Empty, false, "Invalid credentials.");
+            throw new Exception("Пароль введен неверно.");
+            //return new TokenDto(string.Empty, false, "Invalid credentials.");
         }
 
         var claims = new List<Claim>(new[]
